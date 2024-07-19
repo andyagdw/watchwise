@@ -1,0 +1,10 @@
+.carouselItemImg {
+    height: 600px;
+}
+
+.carouselItemDivInfo {
+    position: absolute;
+    top: 0;
+    background-color: var(--darkBlack);
+    z-index: 1;
+}

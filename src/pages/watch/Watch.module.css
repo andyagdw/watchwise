@@ -1,0 +1,33 @@
+.watchLoadingDiv, .noDataDiv {
+    height: var(--divHeight);
+}
+
+.playButton {
+    background-color: var(--darkBlack);
+    padding-inline: 0.5em;
+    border-radius: 10px;
+}
+
+.divider {
+    /* horizontal line divider */
+    border: 2px solid var(--red);
+}
+
+.movieShowPoster {
+    width: 350px;
+    height: 350px;
+}
+
+.genreButtons {
+    background-color: var(--white);
+    color: var(--darkBlack);
+    border-radius: 10px;
+}
+
+.genreButtons:hover {
+    transform: translateY(-1.5px);
+}
+
+.watchTrailerContainer {
+    margin-bottom: 8rem;
+}

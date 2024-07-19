@@ -1,0 +1,39 @@
+:root {
+    --lightBlack: #101014;
+    --darkBlack: #0C0C0C;
+    --red: #E32636;
+    --white: #F9F4F4;
+    --divHeight: 400px;
+}
+
+body {
+    background-color: var(--lightBlack);
+}
+
+.mainContainer {  /* To keep footer at bottom */
+    min-height: 100vh;
+}
+
+footer {
+    background-color: var(--darkBlack);
+}
+
+h2 {
+    font-weight: 700;
+}
+
+.posterContainer {
+    gap: 1em;
+}
+
+.homePageHeadingContainers {
+    margin-bottom: 6rem;
+}
+
+.redText {
+    color: var(--red);
+}
+
+.whiteText {
+    color: var(--white)
+}

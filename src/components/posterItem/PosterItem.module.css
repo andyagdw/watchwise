@@ -1,0 +1,24 @@
+.moviePosterItem {
+    transition: transform .4s ease-in-out;
+    position: relative;
+    color: var(--white)
+}
+
+.moviePosterItem::before { /* Display content type at top left of each item */
+    content: attr(data-contenttype);
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    background-color: var(--darkBlack);
+    padding: 0.4em;
+    font-weight: 600;
+}
+
+.moviePosterItem:hover {
+    transform: scale(1.1);
+}
+
+.moviePoster {
+    width: 200px;
+    height: 200px;
+}

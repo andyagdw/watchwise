@@ -1,0 +1,7 @@
+.cardSeasonsDiv, .seasonsLi {
+    background-color: var(--darkBlack);
+}
+
+.seasonsLi:hover {
+    cursor: pointer;
+}
