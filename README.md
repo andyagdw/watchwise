@@ -3,6 +3,16 @@
 Leveraging the MoviesAPI, Watchwise is a React-based web application that allows users to
 access comprehensive movie and TV show information.
 
+## The User Interface
+
+Hero Section: <br />
+
+![Screenshot 2024-07-19 201941](https://github.com/user-attachments/assets/954ac4a7-3fd6-4c63-a261-16fd97d6fcb6)
+
+Watch Section: <br />
+
+![Screenshot 2024-07-19 202044](https://github.com/user-attachments/assets/7eb03e1e-a23a-408e-9ea8-12d99c6dff69)
+
 ## Getting Started ✅
 
 To get started with Watchwise, follow these steps:
