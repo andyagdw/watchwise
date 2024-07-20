@@ -10,7 +10,7 @@ export default function Video({ backdropPath, styles }) {
         backgroundImage: `url("${backdropPath}")`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        height: "400px",
+        height: "650px",
       }}
     >
       <div>
