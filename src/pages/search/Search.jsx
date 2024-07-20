@@ -48,7 +48,7 @@ export default function Search() {
     };
 
     fetchData();
-  }, [searchData]);
+  }, []);
   
   return (
     <div className="container-md my-5">
