@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./CarouselItem.module.css"
 
-const CarouselItem = ({ title, contentType, date, id, backdrop_path }) => {
+export default function CarouselItem({ title, contentType, date, id, backdrop_path }) {
 
   const link = `/watchwise/watch/${id}`;
   const capitaliseContentType = contentType[0].toUpperCase() + contentType?.slice(1)
@@ -27,5 +27,3 @@ const CarouselItem = ({ title, contentType, date, id, backdrop_path }) => {
       </>
     );
 }
-
-export default CarouselItem

@@ -1,8 +1,8 @@
-import { memo, useContext } from "react";
+import { useContext } from "react";
 import { AppContext } from "../../App";
 import PosterItem from "../posterItem/PosterItem";
 
-const TrendingMovies = memo(function TrendingMovies() {
+export default function TrendingMovies() {
   const { homePageData } = useContext(AppContext);  // Get data from home endpoint in App
   
   const trendingMoviesDataTitle = homePageData?.[0]?.title;
@@ -40,6 +40,4 @@ const TrendingMovies = memo(function TrendingMovies() {
       </div>
     </div>
   );
-})
-
-export default TrendingMovies
+}

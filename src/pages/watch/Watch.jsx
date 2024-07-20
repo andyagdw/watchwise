@@ -9,7 +9,7 @@ import Video from "../../components/video/Video";
 import Genres from "../../components/genres/Genres";
 import { Helmet } from "react-helmet-async";
 
-const Watch = () => {
+export default function Watch() {
   const { id } = useParams();
   let { state } = useLocation();
   const contentType = state?.contentType;
@@ -199,5 +199,3 @@ const Watch = () => {
     </>
   );
 }
-
-export default Watch;

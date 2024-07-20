@@ -1,8 +1,7 @@
-import { memo } from "react";
 import { Link } from "react-router-dom";
 import styles from "./PosterItem.module.css"
 
-const PosterItem = memo(function PosterItem({ posterPath, date, id, contentType }) {
+export default function PosterItem({ posterPath, date, id, contentType }) {
 
   const year = date?.split("-")?.[0];
   const link = `/watchwise/watch/${id}`;
@@ -23,6 +22,4 @@ const PosterItem = memo(function PosterItem({ posterPath, date, id, contentType 
       </div>
     </div>
   );
-})
-
-export default PosterItem
+}

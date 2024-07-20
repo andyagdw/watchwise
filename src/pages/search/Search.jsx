@@ -6,7 +6,7 @@ import { AppContext } from "../../App.jsx"
 import styles from "./Search.module.css"
 import { Helmet } from "react-helmet-async";
 
-const Search = () => {
+export default function Search() {
 
   const { searchquery } = useParams()
   const { errorMessage, setErrorMessage } = useContext(AppContext)
@@ -94,5 +94,3 @@ const Search = () => {
     </div>
   );
 }
-
-export default Search

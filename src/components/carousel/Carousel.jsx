@@ -3,7 +3,7 @@ import { AppContext } from "../../App";
 import CarouselItem from "../carouselItem/CarouselItem";
 import styles from "./Carousel.module.css";
 
-const Carousel = () => {
+export default function Carousel() {
   const { homePageData } = useContext(AppContext);
   const [newMoviesAndShows, setNewMoviesAndShows] = useState(null);
 
@@ -99,6 +99,4 @@ const Carousel = () => {
       </div>
     </>
   );
-};
-
-export default Carousel;
+}

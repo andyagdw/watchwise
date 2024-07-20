@@ -9,7 +9,7 @@ import styles from "./Home.module.css";
 import { apiKey } from "../../constants/constants";
 import { Helmet } from "react-helmet-async";
 
-const Home = () => {
+export default function Home() {
   const { homePageData } = useContext(AppContext);
 
   return (
@@ -61,6 +61,4 @@ const Home = () => {
         )}
     </>
   );
-};
-
-export default Home;
+}
