@@ -7,6 +7,7 @@ import SeasonsDropdown from "../../components/seasonsDropdown/SeasonsDropdown";
 import styles from "./Watch.module.css"
 import Video from "../../components/video/Video";
 import Genres from "../../components/genres/Genres";
+import { Helmet } from "react-helmet-async";
 
 const Watch = () => {
   const { id } = useParams();
@@ -79,6 +80,9 @@ const Watch = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{title ? `${title} | Watchwise` : "Watchwise"}</title>
+      </Helmet>
       {isTimeout &&
         movieShowData === null && ( // No data
           <div className="row">

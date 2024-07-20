@@ -15,6 +15,7 @@ import {
   Route,
   createRoutesFromElements
 } from "react-router-dom";
+import { HelmetProvider } from 'react-helmet-async';
 
 import { createContext, useEffect, useMemo, useState } from 'react';
 
@@ -85,8 +86,10 @@ export default function App() {
   );
 
   return (
-    <AppContext.Provider value={memoizedAppContextValues}>
-      <RouterProvider router={router} />
-    </AppContext.Provider>
+    <HelmetProvider> {/* Wrap entire App component in order to create context & prevent memory leaks */ }
+      <AppContext.Provider value={memoizedAppContextValues}>
+        <RouterProvider router={router} />
+      </AppContext.Provider>
+    </HelmetProvider>
   );
 }

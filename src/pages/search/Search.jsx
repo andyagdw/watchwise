@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { options } from "../../constants/constants"
 import { AppContext } from "../../App.jsx"
 import styles from "./Search.module.css"
+import { Helmet } from "react-helmet-async";
 
 const Search = () => {
 
@@ -51,6 +52,9 @@ const Search = () => {
   
   return (
     <div className="container-md my-5">
+      <Helmet>
+        <title>Search | Watchwise</title>
+      </Helmet>
       {searchData ? (
         <>
           <div className="row mb-5">
