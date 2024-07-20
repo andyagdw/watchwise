@@ -11,7 +11,7 @@ Hero Section: <br />
 
 Watch Section: <br />
 
-![Screenshot 2024-07-19 202044](https://github.com/user-attachments/assets/7eb03e1e-a23a-408e-9ea8-12d99c6dff69)
+![Screenshot 2024-07-20 114924](https://github.com/user-attachments/assets/c67adb06-97e1-4ba3-9ed3-c85284983fa8)
 
 ## Getting Started ✅
 
