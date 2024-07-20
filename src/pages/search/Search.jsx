@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import PosterItem from "../../components/posterItem/PosterItem.jsx";
 import { useContext, useEffect, useState } from "react";
-import Options from "../../constants/constants"
+import { options } from "../../constants/constants"
 import { AppContext } from "../../App.jsx"
 import styles from "./Search.module.css"
 
@@ -18,7 +18,7 @@ const Search = () => {
       const url = `https://movies-api14.p.rapidapi.com/search?query=${searchquery}`;
 
       try {
-        const response = await fetch(url, Options);
+        const response = await fetch(url, options);
 
         if (!response.ok) {
           // Ensure that HTTP errors are caught and handled in the try block

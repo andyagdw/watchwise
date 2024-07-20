@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { AppContext } from "../../App";
-import Options from "../../constants/constants";
+import { options } from "../../constants/constants";
 import PosterItem from "../../components/posterItem/PosterItem";
 import SeasonsDropdown from "../../components/seasonsDropdown/SeasonsDropdown";
 import styles from "./Watch.module.css"
@@ -23,6 +23,7 @@ const Watch = () => {
     data?.first_aired?.split("-")?.[0] || // Check if movie or show
     data?.release_date?.split("-")?.[0];
   const genres = data?.genres;
+  const filteredGenresList = Array.from(new Set(genres)) // Remove duplicates from genres
   const title = data?.title;
   const overview = data?.overview;
   const videoTrailer = data?.youtube_trailer;
@@ -37,7 +38,7 @@ const Watch = () => {
   useEffect(() => {
     const fetchMovieShowData = async (url) => {
       try {
-        const response = await fetch(url, Options);
+        const response = await fetch(url, options);
 
         if (!response.ok) {
           // Ensure that HTTP errors are caught and handled in the try block
@@ -129,7 +130,7 @@ const Watch = () => {
                   {title} {date && <span>&#40;{date}&#41;</span>}
                 </h1>
                 <div className="mb-3">
-                  {genres.map((item, idx) => {
+                  {filteredGenresList !== null && filteredGenresList.map((item, idx) => {
                     return <Genres key={idx} item={item} styles={styles} />;
                   })}
                 </div>
@@ -176,9 +177,9 @@ const Watch = () => {
             ) : (
               <div className="row mb-5">
                 <div className="col-md-12">
-                    <h2 className="whiteText mb-4 h1">
-                      All <span className="redText">Seasons</span>
-                    </h2>
+                  <h2 className="whiteText mb-4 h1">
+                    All <span className="redText">Seasons</span>
+                  </h2>
                   <div id="accordion">
                     {seasons !== null &&
                       seasons?.map((item, idx) => {

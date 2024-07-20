@@ -1,6 +1,6 @@
 // Components
 import Layout from './components/layout/Layout'
-import Options from "./constants/constants";
+import { options } from "./constants/constants";
 import Error from "./components/error/Error"
 
 // Pages
@@ -41,7 +41,7 @@ export default function App() {
   const getHomePageData = async () => {
     try {
 
-      const response = await fetch(url, Options);
+      const response = await fetch(url, options);
 
       if (!response.ok) {
         // Ensure that HTTP errors are caught and handled in the try block
