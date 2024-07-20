@@ -39,7 +39,7 @@ To get started with Watchwise, follow these steps:
 6. Start the development server: <br />
     `npm run dev`
 
-7. Click on the link provided in the terminal to open the application in your browser.
+7. Click on the link provided in the terminal to open the application in your browser 🚀.
 
 ## Credits
 ### Contact
