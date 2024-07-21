@@ -86,7 +86,7 @@ export default function Watch() {
       {isTimeout &&
         movieShowData === null && ( // No data
           <div className="row">
-            <div className="col-md-12">
+            <div className="col-md-8 mx-auto">
               <div
                 className={[
                   "d-flex justify-content-center align-items-center whiteText flex-column text-center",
