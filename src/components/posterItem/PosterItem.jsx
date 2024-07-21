@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import styles from "./PosterItem.module.css"
 
-export default function PosterItem({ posterPath, date, id, contentType }) {
+export default function PosterItem({ posterPath, date, id, contentType, title }) {
 
   const year = date?.split("-")?.[0];
   const link = `/watchwise/watch/${id}`;
 
   return (
     <div className={styles.moviePosterItem} data-contenttype={contentType}>
-      <div>
+      <div className={styles.moviePosterImgContainer} data-title={title}>
         <Link to={link} state={{ contentType: contentType }}>
           <img
             src={posterPath}

@@ -32,6 +32,7 @@ export default function TrendingMovies() {
                     date={item?.release_date}
                     id={item?._id}
                     contentType={item?.contentType}
+                    title={item?.title}
                   />
                 );
               })}

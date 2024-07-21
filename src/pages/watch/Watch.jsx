@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { AppContext } from "../../App";
 import { options } from "../../constants/constants";
 import PosterItem from "../../components/posterItem/PosterItem";
@@ -89,13 +89,14 @@ export default function Watch() {
             <div className="col-md-12">
               <div
                 className={[
-                  "d-flex justify-content-center align-items-center whiteText",
+                  "d-flex justify-content-center align-items-center whiteText flex-column text-center",
                   styles.noDataDiv,
                 ].join(" ")}
               >
-                <h1>
-                  Movie or show does not exist. Back to <Link to="/">home</Link>
-                  ?
+                <h1 className="mb-3">
+                  The movie/show does not exist, an API key was not provided, or
+                  there was a server error. Please check your input or try again
+                  later.
                 </h1>
               </div>
             </div>
@@ -134,9 +135,10 @@ export default function Watch() {
                   {title} {date && <span>&#40;{date}&#41;</span>}
                 </h1>
                 <div className="mb-3">
-                  {filteredGenresList !== null && filteredGenresList.map((item, idx) => {
-                    return <Genres key={idx} item={item} styles={styles} />;
-                  })}
+                  {filteredGenresList !== null &&
+                    filteredGenresList.map((item, idx) => {
+                      return <Genres key={idx} item={item} styles={styles} />;
+                    })}
                 </div>
                 <div className="whiteText">
                   <p className="lead">{overview}</p>
@@ -169,9 +171,11 @@ export default function Watch() {
                           <PosterItem
                             posterPath={item?.poster_path}
                             key={item?._id}
+                            // release_date for movies, first_aired for shows
                             date={item?.first_aired || item?.release_date}
                             id={item?._id}
                             contentType={item?.contentType}
+                            title={item?.title}
                           />
                         );
                       })}

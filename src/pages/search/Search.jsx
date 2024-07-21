@@ -72,9 +72,11 @@ export default function Search() {
                     <PosterItem
                       posterPath={item?.poster_path}
                       key={item?._id}
+                      // release_date for movies, first_aired for shows
                       date={item?.release_date || item?.first_aired}
                       id={item?._id}
                       contentType={item?.contentType}
+                      title={item?.title}
                     />
                   );
                 })}

@@ -32,6 +32,7 @@ export default function TrendingShows() {
                     date={item?.first_aired}
                     id={item?._id}
                     contentType={item?.contentType}
+                    title={item?.title}
                   />
                 );
               })}

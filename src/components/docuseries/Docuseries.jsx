@@ -32,6 +32,7 @@ export default function Docuseries() {
                     date={item?.release_date || item?.first_aired}
                     id={item?._id}
                     contentType={item?.contentType}
+                    title={item?.title}
                   />
                 );
               })}

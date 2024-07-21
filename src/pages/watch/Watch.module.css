@@ -1,5 +1,6 @@
 .watchLoadingDiv, .noDataDiv {
     height: var(--divHeight);
+    text-wrap: balance;
 }
 
 .playButton {
