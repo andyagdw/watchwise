@@ -42,8 +42,6 @@ export default function Watch() {
         const response = await fetch(url, options);
 
         if (!response.ok) {
-          // Ensure that HTTP errors are caught and handled in the try block
-          // Fetch function only throws an error if there is a network error. It ignores HTTP errors like 404 or 500
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
