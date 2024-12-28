@@ -23,8 +23,8 @@ export default function Navbar() {
     <header className="pb-3 mb-5">
       <nav aria-label="Primary" className="container-md">
         <div className="row">
-          <div className="col-md-10 mx-auto d-flex justify-content-between">
-            <div>
+          <div className="col-md-10 mx-auto d-flex flex-column flex-sm-row justify-content-between">
+            <div className="mb-4 mb-sm-0">
               <Link to="/">
                 <img
                   src={WatchwiseImg}
@@ -38,6 +38,7 @@ export default function Navbar() {
                 aria-label="Search shows and movies"
                 method="get"
                 onSubmit={handleSubmit}
+                className={styles.form}
               >
                 <input
                   type="search"

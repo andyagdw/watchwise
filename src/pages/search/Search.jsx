@@ -10,12 +10,11 @@ import { options } from "../../constants/constants"
 import Loading from "../../components/loading/Loading.jsx"
 
 export default function Search() {
-
   const { searchquery } = useParams()
   const [searchData, setSearchData] = useState(null)
-  
+
   const searchDataContents = searchData?.contents
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,14 +38,14 @@ export default function Search() {
     }
     fetchData()
   }, [searchquery])
-  
+
   return (
-    <section aria-labelledby="search-heading" className="container-md my-5">
+    <>
       <Helmet>
         <title>Search | Watchwise</title>
       </Helmet>
       {searchData ? (
-        <>
+        <section aria-labelledby="search-heading" className="container-md my-5">
           <div className="row mb-5">
             <div className="col-md-10 mx-auto">
               <h1 id="search-heading" className="whiteText">
@@ -58,7 +57,7 @@ export default function Search() {
           <div className="row">
             <div className="col-md-10 mx-auto">
               <div className="d-flex flex-wrap posterContainer mx-auto">
-                {searchDataContents.map(item => {
+                {searchDataContents.map((item) => {
                   return (
                     <PosterItem
                       posterPath={item?.poster_path}
@@ -74,12 +73,12 @@ export default function Search() {
               </div>
             </div>
           </div>
-        </>
+        </section>
       ) : (
         <Loading>
           <h1>Loading...</h1>
         </Loading>
       )}
-    </section>
+    </>
   )
 }

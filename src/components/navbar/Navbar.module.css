@@ -7,8 +7,13 @@
     border: 2px solid var(--red);
     border-radius: 50px;
     padding: 1em;
+    width: 100%;
 }
 
 .searchbar:focus {
     outline: none;
+}
+
+.form {
+    width: 100%;
 }

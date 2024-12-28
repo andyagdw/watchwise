@@ -46,6 +46,7 @@ export default function App() {
         // Check if all data was sent from home endpoint
         if (data.length === 10) {
           setHomePageData(data);
+          // localStorage.setItem("watchwise", JSON.stringify(data));
         } else {
           throw new Error("All data was not sent");
         }
@@ -53,6 +54,13 @@ export default function App() {
         console.log(e.message)
       }
     }
+    // const watchwiseData = localStorage.getItem("watchwise");
+    // if (watchwiseData) {
+    //   const data = JSON.parse(watchwiseData);
+    //   setHomePageData(data)
+    // } else {
+    //   getHomePageData()
+    // }
     getHomePageData()
   }, [])
 

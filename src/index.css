@@ -3,11 +3,12 @@
     --darkBlack: #0C0C0C;
     --red: #E32636;
     --white: #F9F4F4;
-    --divHeight: 400px;
 }
 
 body {
     background-color: var(--lightBlack);
+    max-width: 2000px;
+    margin: 0 auto;
 }
 
 .mainContainer {  /* To keep footer at bottom */
@@ -39,6 +40,25 @@ h2 {
 }
 
 .loadingWrapper {
-    height: var(--divHeight);
+    min-height: 50vh;
     text-wrap: balance;
+}
+
+@media (width >= 280px) {
+    iframe {
+        width: 200px;
+        aspect-ratio: 2;
+    }
+}
+
+@media (width >= 520px) {
+    iframe {
+        width: 350px;
+    }
+}
+
+@media (width >= 992px) {
+    iframe {
+        width: 500px;
+    }
 }
