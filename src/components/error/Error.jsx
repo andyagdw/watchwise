@@ -1,12 +1,14 @@
-import { Link } from "react-router-dom";
-import styles from "./Error.module.css"
+// React
+import { Link } from "react-router-dom"
+// Components
+import Loading from "../loading/Loading"
 
 export default function Error() {
   return (
-    <div className={["d-flex justify-content-center align-items-center whiteText", styles.errorDiv].join(" ")}>
+    <Loading>
       <h1>
         Page Not Found. Go back to <Link to="/">home</Link>?
       </h1>
-    </div>
-  );
+    </Loading>
+  )
 }

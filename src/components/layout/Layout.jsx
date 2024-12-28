@@ -1,7 +1,9 @@
+// React
 import { Outlet, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+// Components
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
-import { useEffect } from "react";
 
 export default function Layout() {
 

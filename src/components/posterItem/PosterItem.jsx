@@ -1,4 +1,6 @@
+// React
 import { Link } from "react-router-dom";
+// Styles
 import styles from "./PosterItem.module.css"
 
 export default function PosterItem({ posterPath, date, id, contentType, title }) {

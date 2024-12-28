@@ -1,4 +1,6 @@
+// React
 import { Link } from "react-router-dom";
+// Styles
 import styles from "./CarouselItem.module.css"
 
 export default function CarouselItem({ title, contentType, date, id, backdrop_path }) {
@@ -21,7 +23,7 @@ export default function CarouselItem({ title, contentType, date, id, backdrop_pa
           <img
             className={["d-block w-100", styles.carouselItemImg].join(" ")}
             src={backdrop_path}
-            alt="Movie poster"
+            alt={`${title} movie poster`}
           />
         </Link>
       </>

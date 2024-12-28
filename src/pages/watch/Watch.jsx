@@ -1,124 +1,100 @@
-import { useContext, useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { AppContext } from "../../App";
-import { options } from "../../constants/constants";
-import PosterItem from "../../components/posterItem/PosterItem";
-import SeasonsDropdown from "../../components/seasonsDropdown/SeasonsDropdown";
+// React
+import { useEffect, useState } from "react"
+import { useLocation, useParams } from "react-router-dom"
+import { Helmet } from "react-helmet-async"
+// Constants
+import { options } from "../../constants/constants"
+// Components
+import Movie from "../../components/movie/Movie"
+import Video from "../../components/video/Video"
+import Genres from "../../components/genres/Genres"
+import Loading from "../../components/loading/Loading"
+// Styles
 import styles from "./Watch.module.css"
-import Video from "../../components/video/Video";
-import Genres from "../../components/genres/Genres";
-import { Helmet } from "react-helmet-async";
+import Show from "../../components/show/Show"
 
 export default function Watch() {
-  const { id } = useParams();
-  let { state } = useLocation();
-  const contentType = state?.contentType;
-  const { errorMessage, setErrorMessage } = useContext(AppContext);
-  const [movieShowData, setMovieShowData] = useState(null);
-  // Track if timeout has occured - if movie or show does not exist
-  const [isTimeout, setIsTimeout] = useState(false);
+  const { id } = useParams()
+  let { state } = useLocation()
+  const contentType = state?.contentType
+  const [movieShowData, setMovieShowData] = useState(null)
+  const [errorMessage, setErrorMessage] = useState("")
 
-  const data = movieShowData?.movie || movieShowData?.show; // Check if movie or show
-  const backdropPath = data?.backdrop_path;
+  // Check if movie or show
+  const data = movieShowData?.movie || movieShowData?.show
   const date =
-    data?.first_aired?.split("-")?.[0] || // Check if movie or show
-    data?.release_date?.split("-")?.[0];
-  const genres = data?.genres;
-  const filteredGenresList = Array.from(new Set(genres)) // Remove duplicates from genres
-  const title = data?.title;
-  const overview = data?.overview;
-  const videoTrailer = data?.youtube_trailer;
-  const posterPath = data?.poster_path;
+    data?.first_aired?.split("-")?.[0] || data?.release_date?.split("-")?.[0]
+  // End check if movie or show
+  const backdropPath = data?.backdrop_path
+  const genres = data?.genres
+  // Remove duplicates from genres
+  const filteredGenresList = Array.from(new Set(genres))
+  const title = data?.title
+  const overview = data?.overview
+  const videoTrailer = data?.youtube_trailer
+  const posterPath = data?.poster_path
 
-  const vidId = videoTrailer?.split("v=")[1];
-  const youtubeVideo = `https://www.youtube.com/embed/${vidId}?autoplay=0&mute=1`;
+  const vidId = videoTrailer?.split("v=")[1]
+  const youtubeVideo = `https://www.youtube.com/embed/${vidId}?autoplay=0&mute=1`
 
-  const similarMovies = movieShowData?.similarMovies; // An array
-  const seasons = movieShowData?.seasons; // An array
+  const similarMovies = movieShowData?.similarMovies // An array
+  const seasons = movieShowData?.seasons // An array
+
+  let url
+  if (contentType === "movie") {
+    url = `https://movies-api14.p.rapidapi.com/movie/${id}` // Movie endpoint
+  } else if (contentType === "show") {
+    url = `https://movies-api14.p.rapidapi.com/show/${id}` // Show endpoint
+  }
 
   useEffect(() => {
     const fetchMovieShowData = async (url) => {
+      const timeout = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error("Request timed out")), 10000)
+      })
       try {
-        const response = await fetch(url, options);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        if (errorMessage) {
-          // Check if there was an error message from previous calls. If so, set it to false
-          setErrorMessage(false);
-        }
-        setMovieShowData(data);
-        setIsTimeout(false);  // Clear timeout if data loads successfully before timeout
-      } catch (error) {
-        setErrorMessage(true);
+        const fetchPromise = fetch(url, options).then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+          }
+          return response.json()
+        })
+        const data = await Promise.race([timeout, fetchPromise])
+        setMovieShowData(data)
+        // Clear timeout if data loads successfully before timeout
+      } catch (e) {
+        console.log(e.message)
+        setErrorMessage(`There was an error. ${e}`)
       }
-    };
-
-    let url;
-    if (contentType === "movie") {
-      url = `https://movies-api14.p.rapidapi.com/movie/${id}`; // Movie endpoint
-    } else if (contentType === "show") {
-      url = `https://movies-api14.p.rapidapi.com/show/${id}`; // Show endpoint
     }
-
-    fetchMovieShowData(url);
-
-    const timeoutId = setTimeout(() => {  // Wait for 10 seconds, and then set to true
-      setIsTimeout(true);
-    }, 10000);
-
-    return () => clearTimeout(timeoutId);
-  }, [id, errorMessage]);
-
-  // console.log(seasons)
+    fetchMovieShowData(url)
+  }, [url])
 
   return (
     <>
       <Helmet>
         <title>{title ? `${title} | Watchwise` : "Watchwise"}</title>
       </Helmet>
-      {isTimeout &&
+      {errorMessage &&
         movieShowData === null && ( // No data
-          <div className="row">
-            <div className="col-md-8 mx-auto">
-              <div
-                className={[
-                  "d-flex justify-content-center align-items-center whiteText flex-column text-center",
-                  styles.noDataDiv,
-                ].join(" ")}
-              >
-                <h1 className="mb-3">
-                  The movie/show does not exist, an API key was not provided, or
-                  there was a server error. Please check your input or try again
-                  later.
-                </h1>
-              </div>
-            </div>
-          </div>
+          <Loading>
+            <h1 className="mb-3">
+              The movie/show does not exist, an API key was not provided, or
+              there was a server error. Please check your input or try again
+              later.
+            </h1>
+          </Loading>
         )}
       {movieShowData === null &&
-        !isTimeout && ( // Fetching data
-          <div className="row">
-            <div className="col-md-12">
-              <div
-                className={[
-                  "d-flex justify-content-center align-items-center whiteText",
-                  styles.watchLoadingDiv,
-                ].join(" ")}
-              >
-                <h1>Loading...</h1>
-              </div>
-            </div>
-          </div>
+        !errorMessage && ( // Fetching data
+          <Loading>
+            <h1>Loading...</h1>
+          </Loading>
         )}
       {movieShowData !== null && ( // Data exists
         <>
           <Video backdropPath={backdropPath} styles={styles} />
-          <div className="container-md">
+          <section aria-label={`Watch ${title}`} className="container-md">
             <div className={["mb-4", styles.divider].join(" ")}></div>
             <div className="row mb-5">
               <div className="col-md-3 d-flex justify-content-start justify-content-md-end">
@@ -133,10 +109,9 @@ export default function Watch() {
                   {title} {date && <span>&#40;{date}&#41;</span>}
                 </h1>
                 <div className="mb-3">
-                  {filteredGenresList !== null &&
-                    filteredGenresList.map((item, idx) => {
-                      return <Genres key={idx} item={item} styles={styles} />;
-                    })}
+                  {filteredGenresList.map((item, idx) => {
+                    return <Genres key={idx} item={item} styles={styles} />
+                  })}
                 </div>
                 <div className="whiteText">
                   <p className="lead">{overview}</p>
@@ -156,48 +131,11 @@ export default function Watch() {
                 ></iframe>
               </div>
             </div>
-            {contentType === "movie" ? (
-              <div className="row mb-5">
-                <div className="col-md-10 mx-auto">
-                  <h2 className="whiteText mb-5">
-                    Similar <span className="redText">Movies</span>
-                  </h2>
-                  <div className="d-flex flex-wrap posterContainer">
-                    {similarMovies !== null &&
-                      similarMovies?.map((item) => {
-                        return (
-                          <PosterItem
-                            posterPath={item?.poster_path}
-                            key={item?._id}
-                            // release_date for movies, first_aired for shows
-                            date={item?.first_aired || item?.release_date}
-                            id={item?._id}
-                            contentType={item?.contentType}
-                            title={item?.title}
-                          />
-                        );
-                      })}
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="row mb-5">
-                <div className="col-md-12">
-                  <h2 className="whiteText mb-4 h1">
-                    All <span className="redText">Seasons</span>
-                  </h2>
-                  <div id="accordion">
-                    {seasons !== null &&
-                      seasons?.map((item, idx) => {
-                        return <SeasonsDropdown key={idx} data={item} />;
-                      })}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+            {contentType === "movie" && <Movie similarMovies={similarMovies} />}
+            {contentType === "show" && <Show seasons={seasons} />}
+          </section>
         </>
       )}
     </>
-  );
+  )
 }

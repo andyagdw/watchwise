@@ -1,8 +1,3 @@
-.watchLoadingDiv, .noDataDiv {
-    height: var(--divHeight);
-    text-wrap: balance;
-}
-
 .playButton {
     background-color: var(--darkBlack);
     padding-inline: 0.5em;

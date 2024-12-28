@@ -37,3 +37,8 @@ h2 {
 .whiteText {
     color: var(--white)
 }
+
+.loadingWrapper {
+    height: var(--divHeight);
+    text-wrap: balance;
+}

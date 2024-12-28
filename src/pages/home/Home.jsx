@@ -1,17 +1,20 @@
-import TrendingMovies from "../../components/trendingMovies/TrendingMovies";
-import TrendingShows from "../../components/trendingShows/TrendingShows";
-import Docuseries from "../../components/docuseries/Docuseries";
-import SciFi from "../../components/scifi/SciFi";
-import Carousel from "../../components/carousel/Carousel";
-import { useContext } from "react";
-import { AppContext } from "../../App";
-import styles from "./Home.module.css";
-import { apiKey } from "../../constants/constants";
-import { Helmet } from "react-helmet-async";
+// Components
+import TrendingMovies from "../../components/trendingMovies/TrendingMovies"
+import TrendingShows from "../../components/trendingShows/TrendingShows"
+import Docuseries from "../../components/docuseries/Docuseries"
+import SciFi from "../../components/scifi/SciFi"
+import Carousel from "../../components/carousel/Carousel"
+import Loading from "../../components/loading/Loading"
+// React
+import { useContext } from "react"
+import { Helmet } from "react-helmet-async"
+// Constants
+import { apiKey } from "../../constants/constants"
+// Context
+import { AppContext } from "../../context/Context"
 
 export default function Home() {
-  const { homePageData } = useContext(AppContext);
-
+  const homePageData = useContext(AppContext)
   return (
     <>
       {!apiKey && ( // No Api key provided
@@ -19,46 +22,36 @@ export default function Home() {
           <Helmet>
             <title>Error | Watchwise</title>
           </Helmet>
-          <div
-            className={[
-              "d-flex justify-content-center align-items-center flex-column whiteText",
-              styles.homeNoApiKeyDiv,
-            ].join(" ")}
-          >
+          <Loading>
             <h1>There was an error.</h1>
             <p>Please provide an API key to use this service</p>
-          </div>
+          </Loading>
         </>
       )}
       {homePageData === null &&
         apiKey && ( // Fetching data
-        <>
-          <Helmet>
-            <title>Home | Watchwise</title>
-          </Helmet>
-          <div
-            className={[
-              "d-flex justify-content-center align-items-center whiteText",
-              styles.homeDivLoading,
-            ].join(" ")}
-          >
-            <h1>Loading...</h1>
-          </div>
+          <>
+            <Helmet>
+              <title>Home | Watchwise</title>
+            </Helmet>
+            <Loading>
+              <h1>Loading...</h1>
+            </Loading>
           </>
         )}
       {homePageData !== null &&
         apiKey && ( // Data was fetched
-        <>
-          <Helmet>
-            <title>Home | Watchwise</title>
-          </Helmet>
+          <>
+            <Helmet>
+              <title>Home | Watchwise</title>
+            </Helmet>
             <Carousel />
             <TrendingMovies />
             <TrendingShows />
             <Docuseries />
             <SciFi />
-        </>
+          </>
         )}
     </>
-  );
+  )
 }

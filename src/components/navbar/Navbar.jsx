@@ -1,49 +1,57 @@
-import { Link, useNavigate } from 'react-router-dom';
-import WatchwiseImg from '../../assets/watchwise_logo.png'
+// React
+import { Link, useNavigate } from "react-router-dom"
+import { useState } from "react"
+// Assets
+import WatchwiseImg from "../../assets/watchwise_logo.png"
+// Styles
 import styles from "./Navbar.module.css"
-import { useState } from 'react';
-
 
 export default function Navbar() {
-
-  const [searchQuery, setSearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState("")
   const navigate = useNavigate()
 
   const handleSubmit = e => {
-    if (searchQuery === "") {  // Check if there was no input
-      e.preventDefault()
-      return
-    }
-    const searchQueryTrim = searchQuery.trim()  // Remove any leading or starting white spaces
+    e.preventDefault()
+    if (searchQuery === "") return // No input
+    // Remove any leading or starting white spaces
+    const searchQueryTrim = searchQuery.trim()
 
-    navigate(`/watchwise/${searchQueryTrim}`);
+    navigate(`/watchwise/${searchQueryTrim}`)
   }
 
-    return (
-      <header className="pb-3 mb-5">
-        <nav className="container-md">
-          <div className="row">
-            <div className="col-md-10 mx-auto d-flex justify-content-between">
-              <div>
-                <Link to="/">
-                  <img src={WatchwiseImg} alt="Logo" className={styles.watchwiseImg} />
-                </Link>
-              </div>
-              <div className="d-flex align-items-center">
-                <form method='get' onSubmit={handleSubmit}>
-                  <input
-                    type="search"
-                    placeholder="Search..."
-                    name="search"
-                    id="search"
-                    className={styles.searchbar}
-                    onChange={e => setSearchQuery(e.target.value)}
-                  />
-                </form>
-              </div>
+  return (
+    <header className="pb-3 mb-5">
+      <nav aria-label="Primary" className="container-md">
+        <div className="row">
+          <div className="col-md-10 mx-auto d-flex justify-content-between">
+            <div>
+              <Link to="/">
+                <img
+                  src={WatchwiseImg}
+                  alt="Watchwise Logo"
+                  className={styles.watchwiseImg}
+                />
+              </Link>
             </div>
+            <search className="d-flex align-items-center">
+              <form
+                aria-label="Search shows and movies"
+                method="get"
+                onSubmit={handleSubmit}
+              >
+                <input
+                  type="search"
+                  placeholder="Search..."
+                  name="search"
+                  id="search"
+                  className={styles.searchbar}
+                  onChange={e => setSearchQuery(e.target.value)}
+                />
+              </form>
+            </search>
           </div>
-        </nav>
-      </header>
-    );
+        </div>
+      </nav>
+    </header>
+  )
 }
