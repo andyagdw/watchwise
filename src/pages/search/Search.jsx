@@ -1,7 +1,6 @@
 // React
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { Helmet } from "react-helmet-async"
 // Components
 import PosterItem from "../../components/posterItem/PosterItem.jsx"
 import Loading from "../../components/loading/Loading.jsx"
@@ -40,9 +39,9 @@ export default function Search() {
 
   return (
     <>
-      <Helmet>
+      <>
         <title>Search | Watchwise</title>
-      </Helmet>
+      </>
       {/* Error */}
       {error && (
         <Loading>

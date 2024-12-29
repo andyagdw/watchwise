@@ -7,7 +7,6 @@ import Carousel from "../../components/carousel/Carousel"
 import Loading from "../../components/loading/Loading"
 // React
 import { useContext } from "react"
-import { Helmet } from "react-helmet-async"
 // Constants
 import { apiKey } from "../../constants/constants"
 // Context
@@ -20,9 +19,9 @@ export default function Home() {
       {/* No api key or error */}
       {(!apiKey || error) && ( 
         <>
-          <Helmet>
+          <>
             <title>Error | Watchwise</title>
-          </Helmet>
+          </>
           <Loading>
             <h1>There was an error. Please check if you have provided an
               API key or try again later.
@@ -34,9 +33,9 @@ export default function Home() {
       {homePageData === null && !error &&
         apiKey && (
           <>
-            <Helmet>
+            <>
               <title>Home | Watchwise</title>
-            </Helmet>
+            </>
             <Loading>
               <h1>Loading...</h1>
             </Loading>
@@ -46,9 +45,9 @@ export default function Home() {
       {homePageData !== null && !error &&
         apiKey && (
           <>
-            <Helmet>
+            <>
               <title>Home | Watchwise</title>
-            </Helmet>
+            </>
             <Carousel />
             <TrendingMovies />
             <TrendingShows />

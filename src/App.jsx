@@ -14,7 +14,6 @@ import {
   Route,
   createRoutesFromElements,
 } from "react-router-dom"
-import { HelmetProvider } from "react-helmet-async"
 import { useEffect, useState } from "react"
 // Context
 import { AppContext } from "./context/Context"
@@ -48,19 +47,20 @@ export default function App() {
           throw new Error("Data was not sent");
         }
         setHomePageData(data);
-        localStorage.setItem("watchwise", JSON.stringify(data));
+        // localStorage.setItem("watchwise", JSON.stringify(data));
       } catch (e) {
         setError("Error fetching homepage data. Please try again later.");
       }
     }
-    const watchwiseData = localStorage.getItem("watchwise") || null;
-    if (watchwiseData) {
-      const data = JSON.parse(watchwiseData);
-      setHomePageData(data)
-    } else {
-      getHomePageData()
-    }
-    // getHomePageData()
+    // IGNORE:
+    // const watchwiseData = localStorage.getItem("watchwise") || null;
+    // if (watchwiseData) {
+    //   const data = JSON.parse(watchwiseData);
+    //   setHomePageData(data)
+    // } else {
+    //   getHomePageData()
+    // }
+    getHomePageData()
   }, [])
 
   const appContext = [
@@ -69,11 +69,8 @@ export default function App() {
   ]
 
   return (
-    <HelmetProvider>
-      {/* Wrap entire App component in order to create context & prevent memory leaks */}
-      <AppContext.Provider value={appContext}>
-        <RouterProvider router={router} />
-      </AppContext.Provider>
-    </HelmetProvider>
+    <AppContext value={appContext}>
+      <RouterProvider router={router} />
+    </AppContext>
   )
 }

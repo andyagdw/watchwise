@@ -1,7 +1,6 @@
 // React
 import { useEffect, useState } from "react"
 import { useLocation, useParams } from "react-router-dom"
-import { Helmet } from "react-helmet-async"
 // Constants
 import { options } from "../../constants/constants"
 // Components
@@ -69,9 +68,9 @@ export default function Watch() {
 
   return (
     <>
-      <Helmet>
+      <>
         <title>{title ? `${title} | Watchwise` : "Watchwise"}</title>
-      </Helmet>
+      </>
       {/* Error */}
       {errorMessage &&
         movieShowData === null && (
