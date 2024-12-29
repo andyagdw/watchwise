@@ -1,16 +1,10 @@
 // React
-import { useEffect, useState } from "react"
 import { v4 as uuidv4 } from "uuid"
 // Styles
 import styles from "./SeasonsDropdown.module.css"
 
 export default function SeasonsDropdown({ data }) {
-  const [accordionId, setAccordionId] = useState("")
-
-  useEffect(() => {
-    const id = uuidv4()
-    setAccordionId(id)
-  }, [])
+  const accordionId = uuidv4()
 
   const episodes = data?.episodes // An array of episodes
   const buttonId = `heading-${accordionId}`;
