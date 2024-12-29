@@ -1,7 +1,6 @@
 .moviePosterItem {
-    transition: transform .4s ease-in-out;
     position: relative;
-    color: var(--white)
+    color: var(--white);
 }
 
 .moviePosterItem::before { /* Display content type at top left of each item */
@@ -15,6 +14,7 @@
 }
 
 .moviePosterImgContainer {
+    overflow: hidden;
     position: relative;
 }
 
@@ -29,11 +29,12 @@
     font-weight: 600;
 }
 
-.moviePosterItem:hover {
-    transform: scale(1.1);
-}
-
 .moviePoster {
     width: 200px;
     height: 200px;
+    transition: transform .4s ease-in-out;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 }
