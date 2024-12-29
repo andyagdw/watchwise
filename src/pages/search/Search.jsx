@@ -4,14 +4,14 @@ import { useEffect, useState } from "react"
 import { Helmet } from "react-helmet-async"
 // Components
 import PosterItem from "../../components/posterItem/PosterItem.jsx"
+import Loading from "../../components/loading/Loading.jsx"
 // Constants
 import { options } from "../../constants/constants"
-// Styles
-import Loading from "../../components/loading/Loading.jsx"
 
 export default function Search() {
   const { searchquery } = useParams()
   const [searchData, setSearchData] = useState(null)
+  const [error, setError] = useState("")
 
   const searchDataContents = searchData?.contents
 
@@ -27,13 +27,12 @@ export default function Search() {
         const data = await response.json()
 
         // Check if all data was sent from API
-        if (data.contents) {
-          setSearchData(data)
-        } else {
+        if (!data.contents) {
           throw new Error("All data was not sent")
         }
+        setSearchData(data)
       } catch (e) {
-        console.log(e.message)
+        setError("Error fetching search data. Please try again later.")
       }
     }
     fetchData()
@@ -44,7 +43,20 @@ export default function Search() {
       <Helmet>
         <title>Search | Watchwise</title>
       </Helmet>
-      {searchData ? (
+      {/* Error */}
+      {error && (
+        <Loading>
+          <h1>{error}</h1>
+        </Loading>
+      )}
+      {/* Fetching data */}
+      {(!searchData && !error) && (
+        <Loading>
+          <h1>Loading...</h1>
+        </Loading>
+      )}
+      {/* Show data */}
+      {(searchData && !error) && (
         <section aria-labelledby="search-heading" className="container-md my-5">
           <div className="row mb-5">
             <div className="col-md-10 mx-auto">
@@ -57,7 +69,7 @@ export default function Search() {
           <div className="row">
             <div className="col-md-10 mx-auto">
               <div className="d-flex flex-wrap posterContainer mx-auto">
-                {searchDataContents.map((item) => {
+                {searchDataContents.map(item => {
                   return (
                     <PosterItem
                       posterPath={item?.poster_path}
@@ -74,10 +86,6 @@ export default function Search() {
             </div>
           </div>
         </section>
-      ) : (
-        <Loading>
-          <h1>Loading...</h1>
-        </Loading>
       )}
     </>
   )

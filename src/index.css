@@ -7,12 +7,15 @@
 
 body {
     background-color: var(--lightBlack);
-    max-width: 2000px;
-    margin: 0 auto;
 }
 
 .mainContainer {  /* To keep footer at bottom */
     min-height: 100vh;
+}
+
+main {
+    max-width: 2000px;
+    margin: 0 auto;
 }
 
 footer {
@@ -44,10 +47,13 @@ h2 {
     text-wrap: balance;
 }
 
+iframe {
+    aspect-ratio: 2;
+}
+
 @media (width >= 280px) {
     iframe {
         width: 200px;
-        aspect-ratio: 2;
     }
 }
 

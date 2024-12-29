@@ -8,7 +8,7 @@ export default function Loading({ children }) {
               "d-flex justify-content-center align-items-center whiteText loadingWrapper",
             ].join(" ")}
           >
-            <div>{children}</div>
+            <div className="text-center">{children}</div>
           </div>
         </div>
       </div>

@@ -45,6 +45,7 @@ export default function Navbar() {
                   placeholder="Search..."
                   name="search"
                   id="search"
+                  aria-label="Search"
                   className={styles.searchbar}
                   onChange={e => setSearchQuery(e.target.value)}
                 />

@@ -6,7 +6,7 @@ import { AppContext } from "../../context/Context"
 import PosterItem from "../posterItem/PosterItem"
 
 export default function Docuseries() {
-  const homePageData = useContext(AppContext)
+  const [ homePageData ] = useContext(AppContext)
 
   const docuseriesDataTitle = homePageData?.[9]?.title
   const firstWord = docuseriesDataTitle?.split(" ")?.[0]
@@ -28,7 +28,7 @@ export default function Docuseries() {
       <div className="row">
         <div className="col-md-10 mx-auto">
           <div className="d-flex flex-wrap posterContainer mx-auto">
-            {docuseriesDataMovies.map((item) => {
+            {docuseriesDataMovies.map(item => {
               return (
                 <PosterItem
                   posterPath={item?.poster_path}

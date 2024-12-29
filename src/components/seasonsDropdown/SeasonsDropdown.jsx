@@ -13,8 +13,8 @@ export default function SeasonsDropdown({ data }) {
   }, [])
 
   const episodes = data?.episodes // An array of episodes
-  const buttonId = `heading-${accordionId}`
-  const collapseId = `collapse-${accordionId}`
+  const buttonId = `heading-${accordionId}`;
+  const collapseId = `collapse-${accordionId}`;
   const collapseTarget = `#${collapseId}`
 
   return (
@@ -54,7 +54,7 @@ export default function SeasonsDropdown({ data }) {
                     styles.seasonsLi,
                   ].join(" ")}
                 >
-                  S{item?.season_number} E{item?.episode_number}
+                  Season {item?.season_number} Episode {item?.episode_number}
                 </li>
               )
             })}

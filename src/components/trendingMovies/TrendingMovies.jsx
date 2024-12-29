@@ -6,7 +6,7 @@ import { AppContext } from "../../context/Context"
 import PosterItem from "../posterItem/PosterItem"
 
 export default function TrendingMovies() {
-  const homePageData = useContext(AppContext)
+  const [homePageData] = useContext(AppContext)
 
   const trendingMoviesDataTitle = homePageData?.[0]?.title
   const firstWord = trendingMoviesDataTitle?.split(" ")?.[0]

@@ -9,9 +9,9 @@ import Movie from "../../components/movie/Movie"
 import Video from "../../components/video/Video"
 import Genres from "../../components/genres/Genres"
 import Loading from "../../components/loading/Loading"
+import Show from "../../components/show/Show"
 // Styles
 import styles from "./Watch.module.css"
-import Show from "../../components/show/Show"
 
 export default function Watch() {
   const { id } = useParams()
@@ -48,23 +48,20 @@ export default function Watch() {
   }
 
   useEffect(() => {
-    const fetchMovieShowData = async (url) => {
-      const timeout = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error("Request timed out")), 10000)
-      })
+    const fetchMovieShowData = async url => {
       try {
-        const fetchPromise = fetch(url, options).then((response) => {
+        const response = await fetch(url, options)
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
           }
-          return response.json()
-        })
-        const data = await Promise.race([timeout, fetchPromise])
+        const data = await response.json()
+
+        if (!data) {
+          throw new Error("Data was not sent")
+        }
         setMovieShowData(data)
-        // Clear timeout if data loads successfully before timeout
       } catch (e) {
-        console.log(e.message)
-        setErrorMessage(`There was an error. ${e}`)
+        setErrorMessage("Error fetching data. Please try again later.")
       }
     }
     fetchMovieShowData(url)
@@ -75,8 +72,9 @@ export default function Watch() {
       <Helmet>
         <title>{title ? `${title} | Watchwise` : "Watchwise"}</title>
       </Helmet>
+      {/* Error */}
       {errorMessage &&
-        movieShowData === null && ( // No data
+        movieShowData === null && (
           <Loading>
             <h1 className="mb-3">
               The movie/show does not exist, an API key was not provided, or
@@ -85,13 +83,15 @@ export default function Watch() {
             </h1>
           </Loading>
         )}
+      {/* Fetching data */}
       {movieShowData === null &&
-        !errorMessage && ( // Fetching data
+        !errorMessage && (
           <Loading>
             <h1>Loading...</h1>
           </Loading>
         )}
-      {movieShowData !== null && ( // Data exists
+      {/* Show data */}
+      {movieShowData !== null && (
         <>
           <Video backdropPath={backdropPath} styles={styles} />
           <section aria-label={`Watch ${title}`} className="container-md">
@@ -124,8 +124,6 @@ export default function Watch() {
                   Watch <span className="redText">Trailer</span>
                 </h2>
                 <iframe
-                  width="500"
-                  height="325"
                   src={youtubeVideo}
                   allowFullScreen
                 ></iframe>

@@ -14,22 +14,25 @@ import { apiKey } from "../../constants/constants"
 import { AppContext } from "../../context/Context"
 
 export default function Home() {
-  const homePageData = useContext(AppContext)
+  const [homePageData, error] = useContext(AppContext)
   return (
     <>
-      {!apiKey && ( // No Api key provided
+      {/* No api key or error */}
+      {(!apiKey || error) && ( 
         <>
           <Helmet>
             <title>Error | Watchwise</title>
           </Helmet>
           <Loading>
-            <h1>There was an error.</h1>
-            <p>Please provide an API key to use this service</p>
+            <h1>There was an error. Please check if you have provided an
+              API key or try again later.
+            </h1>
           </Loading>
         </>
       )}
-      {homePageData === null &&
-        apiKey && ( // Fetching data
+      {/* Fetching data */}
+      {homePageData === null && !error &&
+        apiKey && (
           <>
             <Helmet>
               <title>Home | Watchwise</title>
@@ -39,8 +42,9 @@ export default function Home() {
             </Loading>
           </>
         )}
-      {homePageData !== null &&
-        apiKey && ( // Data was fetched
+      {/* Show data */}
+      {homePageData !== null && !error &&
+        apiKey && (
           <>
             <Helmet>
               <title>Home | Watchwise</title>

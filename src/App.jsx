@@ -31,6 +31,7 @@ const router = createBrowserRouter(
 
 export default function App() {
   const [homePageData, setHomePageData] = useState(null)
+  const [error, setError] = useState("")
 
   useEffect(() => {
     const getHomePageData = async () => {
@@ -43,31 +44,34 @@ export default function App() {
         }
         const data = await response.json();
 
-        // Check if all data was sent from home endpoint
-        if (data.length === 10) {
-          setHomePageData(data);
-          // localStorage.setItem("watchwise", JSON.stringify(data));
-        } else {
-          throw new Error("All data was not sent");
+        if (!data) {
+          throw new Error("Data was not sent");
         }
+        setHomePageData(data);
+        localStorage.setItem("watchwise", JSON.stringify(data));
       } catch (e) {
-        console.log(e.message)
+        setError("Error fetching homepage data. Please try again later.");
       }
     }
-    // const watchwiseData = localStorage.getItem("watchwise");
-    // if (watchwiseData) {
-    //   const data = JSON.parse(watchwiseData);
-    //   setHomePageData(data)
-    // } else {
-    //   getHomePageData()
-    // }
-    getHomePageData()
+    const watchwiseData = localStorage.getItem("watchwise") || null;
+    if (watchwiseData) {
+      const data = JSON.parse(watchwiseData);
+      setHomePageData(data)
+    } else {
+      getHomePageData()
+    }
+    // getHomePageData()
   }, [])
+
+  const appContext = [
+    homePageData,
+    error
+  ]
 
   return (
     <HelmetProvider>
       {/* Wrap entire App component in order to create context & prevent memory leaks */}
-      <AppContext.Provider value={homePageData}>
+      <AppContext.Provider value={appContext}>
         <RouterProvider router={router} />
       </AppContext.Provider>
     </HelmetProvider>
