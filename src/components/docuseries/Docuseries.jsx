@@ -6,7 +6,7 @@ import { AppContext } from "../../context/Context"
 import PosterItem from "../posterItem/PosterItem"
 
 export default function Docuseries() {
-  const [ homePageData ] = useContext(AppContext)
+  const { homePageData } = useContext(AppContext)
 
   const docuseriesDataTitle = homePageData?.[9]?.title
   const firstWord = docuseriesDataTitle?.split(" ")?.[0]

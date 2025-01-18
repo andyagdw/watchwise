@@ -13,7 +13,7 @@ import { apiKey } from "../../constants/constants"
 import { AppContext } from "../../context/Context"
 
 export default function Home() {
-  const [homePageData, error] = useContext(AppContext)
+  const { homePageData, error } = useContext(AppContext)
   return (
     <>
       {/* No api key or error */}

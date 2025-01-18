@@ -8,7 +8,7 @@ import CarouselItem from "../carouselItem/CarouselItem"
 import styles from "./Carousel.module.css"
 
 export default function Carousel() {
-  const [homePageData] = useContext(AppContext)
+  const { homePageData } = useContext(AppContext)
   const [newMoviesAndShows, setNewMoviesAndShows] = useState(null)
 
   // Get movie array

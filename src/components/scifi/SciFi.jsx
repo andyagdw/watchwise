@@ -6,7 +6,7 @@ import { AppContext } from "../../context/Context"
 import PosterItem from "../posterItem/PosterItem"
 
 export default function SciFi() {
-  const [homePageData] = useContext(AppContext)
+  const { homePageData } = useContext(AppContext)
 
   const sciFiDataTitle = homePageData?.[8]?.title
   const firstWord = sciFiDataTitle?.split(" ")?.[0]

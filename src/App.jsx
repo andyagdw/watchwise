@@ -63,10 +63,7 @@ export default function App() {
     getHomePageData()
   }, [])
 
-  const appContext = [
-    homePageData,
-    error
-  ]
+  const appContext = { homePageData, error }
 
   return (
     <AppContext value={appContext}>
