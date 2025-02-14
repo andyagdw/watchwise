@@ -42,8 +42,9 @@ export default function Navbar() {
               >
                 <input
                   type="search"
+                  inputMode="search"
                   placeholder="Search..."
-                  name="search"
+                  name="q"
                   id="search"
                   aria-label="Search"
                   className={styles.searchbar}
